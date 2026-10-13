@@ -1,6 +1,6 @@
 # Zeroth Responder AI
 
-Zeroth-Responder is an intelligent healthcare navigation proof-of-concept. It sits right before the first responders, acting as a triage router for near-emergency medical situations. By combining Retrieval-Augmented Generation (RAG) with agentic tool calling via the Model Context Protocol (MCP), it processes patient symptoms, location, and residency status to recommend the optimal medical facility.
+Zeroth Responder is an intelligent healthcare navigation proof-of-concept. It sits right before the first responders, acting as a triage router for near-emergency medical situations. By combining Retrieval-Augmented Generation (RAG) with agentic tool calling via the Model Context Protocol (MCP), it processes patient symptoms, location, and residency status to recommend the optimal medical facility.
 
 The system is designed to evaluate real-world constraints such as physical drive times, mock hospital wait times, and Australian healthcare routing logic (Medicare eligibility, state ambulance policies, and visa insurance requirements) without ever requesting or storing sensitive identification numbers.
 
