@@ -14,7 +14,8 @@ The project relies on a distributed microservice architecture designed for speed
 *   **Vector Database (Qdrant):** Stores and filters vectorized institutional policies and insurance guidelines.
 *   **Relational Database (PostgreSQL):** Manages ephemeral guest session data and non-identifiable user residency parameters.
 *   **Clinical Availability (TypeScript/Node):** A dedicated MCP server that synthesizes and serves mock hospital capacities, wait times, and specialist rosters.
-*   **AI/LLM:** Cloud-hosted LLM (e.g., Azure OpenAI) optimized for rapid JSON tool calling and orchestration.
+*   **LLM Gateway (LiteLLM):** Model-agnostic proxy gateway providing a unified OpenAI-compatible endpoint. Routes requests dynamically across multiple LLM providers (Anthropic, OpenAI, Codex, Google Gemini, Azure OpenAI) with standardized tool-calling schemas.
+*   **AI/LLM:** Cloud-hosted or provider LLMs routed via LiteLLM, optimized for rapid JSON tool calling and orchestration under zero-data-retention policies.
 
 ## Key Features
 
@@ -29,20 +30,21 @@ zeroth-responder/
 ├── frontend/           # React SPA (Vite) for guest triage sessions
 ├── backend/            # Go Orchestrator and fastembed-go logic
 ├── mcp-server/         # TypeScript MCP server for mock clinical data
+├── litellm/            # LiteLLM proxy configuration (config.yaml) for multi-provider routing
 ├── docs/               # Architecture diagrams and API schemas
 ├── infra/              # Terraform modules for Azure deployment
-└── docker-compose.yml  # Local development environment
+└── docker-compose.yml  # Local development environment (Postgres, Qdrant, MCP, LiteLLM)
 ```
 
 ## Local Development Setup
 
 Prerequisites: Docker, Docker Compose, and Go 1.21+.
 
-This project uses LiteLLM as a proxy gateway. This allows the Go orchestrator to use a single standard interface while routing requests to any LLM provider (Anthropic, OpenAI, Gemini, etc.) by simply passing the target model name in the API call.
+This project uses LiteLLM as a proxy gateway. This allows the Go orchestrator to use a single standard OpenAI-compatible interface while routing requests to any LLM provider (Anthropic, OpenAI, Codex, Gemini, Azure OpenAI, etc.) by simply passing the target model name in the API call.
 
 ### Clone the repository:
 ```bash
-git clone [https://github.com/yourusername/zeroth-responder.git](https://github.com/yourusername/zeroth-responder.git)
+git clone https://github.com/yourusername/zeroth-responder.git
 cd zeroth-responder
 ```
 
@@ -60,7 +62,7 @@ ANTHROPIC_API_KEY=your-anthropic-key
 GEMINI_API_KEY=your-google-key
 ```
 
-### Start the local infrastructure (Postgres, Qdrant, and the MCP Server):
+### Start the local infrastructure (Postgres, Qdrant, MCP Server, and LiteLLM Proxy):
 
 ```Bash
 docker-compose up -d
