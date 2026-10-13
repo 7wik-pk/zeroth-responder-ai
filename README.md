@@ -75,5 +75,6 @@ cd backend
 go run main.go
 ```
 
-Disclaimer
+## Disclaimer
+
 This is a proof-of-concept software project intended for architectural exploration of LLM tool-calling and RAG pipelines. It is not a certified medical device, does not provide verified medical advice, and should not be used for actual emergency medical triage.
